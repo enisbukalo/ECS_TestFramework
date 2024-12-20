@@ -17,7 +17,7 @@ class Entity:
 
     def add_component(self, component: Component) -> None:
         """Add a component to this entity"""
-        self.components[component.component_id] = component
+        self.components[component.id] = component
 
     def remove_component(self, component_id: ComponentId) -> None:
         """Remove a component from this entity"""
