@@ -1,0 +1,105 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.1, pytest-8.3.4, pluggy-1.5.0 -- C:\Users\Enis Bukalo\Documents\Venvs\ECS_TestFramework\Scripts\python.exe
+cachedir: .pytest_cache
+rootdir: C:\Users\Enis Bukalo\Documents\GitHub\ECS_TestFramework
+collecting ... collected 14 items
+
+Tests/test_component.py::test_component_initialization PASSED            [  7%]
+Tests/test_component.py::test_component_unique_ids PASSED                [ 14%]
+Tests/test_component.py::test_component_inheritance PASSED               [ 21%]
+Tests/test_component.py::test_component_type_hints PASSED                [ 28%]
+Tests/test_entity.py::test_entity_initialization PASSED                  [ 35%]
+Tests/test_entity.py::test_add_component FAILED                          [ 42%]
+Tests/test_entity.py::test_remove_component FAILED                       [ 50%]
+Tests/test_entity.py::test_has_components FAILED                         [ 57%]
+Tests/test_entity.py::test_get_nonexistent_component PASSED              [ 64%]
+Tests/test_system.py::test_system_initialization PASSED                  [ 71%]
+Tests/test_system.py::test_add_remove_entities PASSED                    [ 78%]
+Tests/test_system.py::test_system_update PASSED                          [ 85%]
+Tests/test_system.py::test_system_enable_disable PASSED                  [ 92%]
+Tests/test_system.py::test_system_priority PASSED                        [100%]
+
+================================== FAILURES ===================================
+_____________________________ test_add_component ______________________________
+
+    def test_add_component():
+        """Test adding components to an entity"""
+        entity = Entity(1)
+        comp = TestComponent(42)
+    
+>       entity.add_component(comp)
+
+Tests\test_entity.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Core.Entity.Entity object at 0x0000027BBD24B4D0>
+component = TestComponent(value=42)
+
+    def add_component(self, component: Component) -> None:
+        """Add a component to this entity"""
+>       self.components[component.component_id] = component
+E       AttributeError: 'TestComponent' object has no attribute 'component_id'
+
+Core\Entity.py:20: AttributeError
+____________________________ test_remove_component ____________________________
+
+    def test_remove_component():
+        """Test removing components from an entity"""
+        entity = Entity(1)
+        comp = TestComponent(42)
+    
+>       entity.add_component(comp)
+
+Tests\test_entity.py:38: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Core.Entity.Entity object at 0x0000027BBD234B10>
+component = TestComponent(value=42)
+
+    def add_component(self, component: Component) -> None:
+        """Add a component to this entity"""
+>       self.components[component.component_id] = component
+E       AttributeError: 'TestComponent' object has no attribute 'component_id'
+
+Core\Entity.py:20: AttributeError
+_____________________________ test_has_components _____________________________
+
+    def test_has_components():
+        """Test checking for multiple components"""
+        entity = Entity(1)
+        comp1 = TestComponent(42)
+        comp2 = TestComponent(24)
+    
+>       entity.add_component(comp1)
+
+Tests\test_entity.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <Core.Entity.Entity object at 0x0000027BBD249510>
+component = TestComponent(value=42)
+
+    def add_component(self, component: Component) -> None:
+        """Add a component to this entity"""
+>       self.components[component.component_id] = component
+E       AttributeError: 'TestComponent' object has no attribute 'component_id'
+
+Core\Entity.py:20: AttributeError
+============================== warnings summary ===============================
+Tests\test_entity.py:5
+  C:\Users\Enis Bukalo\Documents\GitHub\ECS_TestFramework\Tests\test_entity.py:5: PytestCollectionWarning: cannot collect test class 'TestComponent' because it has a __init__ constructor (from: Tests/test_entity.py)
+    @dataclass
+
+Tests\test_system.py:5
+  C:\Users\Enis Bukalo\Documents\GitHub\ECS_TestFramework\Tests\test_system.py:5: PytestCollectionWarning: cannot collect test class 'TestComponent' because it has a __init__ constructor (from: Tests/test_system.py)
+    @dataclass
+
+Tests\test_system.py:14
+  C:\Users\Enis Bukalo\Documents\GitHub\ECS_TestFramework\Tests\test_system.py:14: PytestCollectionWarning: cannot collect test class 'TestSystem' because it has a __init__ constructor (from: Tests/test_system.py)
+    class TestSystem(System):
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED Tests/test_entity.py::test_add_component - AttributeError: 'TestComponent' object has no attribute 'component_id'
+FAILED Tests/test_entity.py::test_remove_component - AttributeError: 'TestComponent' object has no attribute 'component_id'
+FAILED Tests/test_entity.py::test_has_components - AttributeError: 'TestComponent' object has no attribute 'component_id'
+================== 3 failed, 11 passed, 3 warnings in 0.08s ===================
