@@ -2,9 +2,12 @@ name: Python Tests and Linting
 
 on:
   push:
-    branches: ["main"]
+    branches:
+      - "*" # Matches every branch
+      - "!main" # Excludes main branch
   pull_request:
-    branches: ["main"]
+    branches:
+      - main # Only for PRs targeting main
 
 jobs:
   test:
@@ -33,4 +36,4 @@ jobs:
 
       - name: Lint with pylint
         run: |
-          pylint --rcfile=.pylintrc Core/
+          pylint --rcfile=.pylintrc core/ Tests/
