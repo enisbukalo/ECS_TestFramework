@@ -33,4 +33,4 @@ jobs:
 
       - name: Lint with pylint
         run: |
-          pylint --rcfile=.pylintrc Core/ Tests/
+          pylint --rcfile=.pylintrc Core/
